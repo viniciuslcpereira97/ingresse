@@ -26,7 +26,7 @@ Route::prefix('users')->namespace('Api')->group(function() {
     Route::get('/{id}', 'UsersController@getById');
 
     // POST
-    Route::post('/{id}', 'UsersController@store');
+    Route::post('/', 'UsersController@store');
 
     // PUT
     Route::put('/{id}', 'UsersController@udpateById');
