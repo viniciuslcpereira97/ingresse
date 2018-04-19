@@ -9,6 +9,22 @@ use Ingresse\Repositories\UserRepository;
 class UsersController extends Controller
 {
 
+    private $repository;
+
+    /**
+     *
+     * Class constructor
+     *
+     * @param Ingresse\Repositories\UserRepository $repository
+     *
+     * Injects UserRepository at class
+     *
+     */
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      *
      * Get all users data
@@ -16,7 +32,7 @@ class UsersController extends Controller
      */
     public function all()
     {
-        return 'all';
+        return $this->repository->all();
     }
 
     /**
@@ -28,7 +44,7 @@ class UsersController extends Controller
      */
     public function getById($id)
     {
-        return "get user -> id: {$id}";
+        return $this->repository->get($id);
     }
 
     /**
@@ -40,7 +56,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        return 'store user';
+        return $this->repository->store($request->all());
     }
 
     /**
@@ -53,7 +69,7 @@ class UsersController extends Controller
      */
     public function udpateById(Request $request, $id)
     {
-        return "update user -> id: {$id}";
+        return $this->repository->update($request->all(), $id);
     }
 
     /**
@@ -65,7 +81,7 @@ class UsersController extends Controller
      */
     public function deleteById($id)
     {
-        return "delete user -> id: {$id}";
+        return $this->repository->delete($id);
     }
 
 }
