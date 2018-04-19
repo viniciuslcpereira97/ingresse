@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace Ingresse\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Ingresse\Http\Controllers\Controller;
+use Ingresse\Repositories\UserRepository;
 
 class UsersController extends Controller
 {
@@ -25,22 +26,34 @@ class UsersController extends Controller
      * @param integer $id
      *
      */
-    public function getUser($id)
+    public function getById($id)
     {
-        return 'get user';
+        return "get user -> id: {$id}";
+    }
+
+    /**
+     *
+     * Store user data
+     *
+     * @param Illuminate\Http\Request $request
+     *
+     */
+    public function store(Request $request)
+    {
+        return 'store user';
     }
 
     /**
      *
      * Update user data by id
      *
-     * @param Request $request
+     * @param Illuminate\Http\Request $request
      * @param integer $id
      *
      */
-    public function udpateUser(Request $request, $id)
+    public function udpateById(Request $request, $id)
     {
-        return 'update user';
+        return "update user -> id: {$id}";
     }
 
     /**
@@ -50,9 +63,9 @@ class UsersController extends Controller
      * @param integer $id
      *
      */
-    public function deleteUser($id)
+    public function deleteById($id)
     {
-        return 'delete user';
+        return "delete user -> id: {$id}";
     }
 
 }
