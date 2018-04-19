@@ -29,9 +29,9 @@ Route::prefix('users')->namespace('Api')->group(function() {
     Route::post('/', 'UsersController@store');
 
     // PUT
-    Route::put('/{id}', 'UsersController@udpateById');
+    Route::put('/{user}', 'UsersController@updateById');
 
     // DELETE
-    Route::delete('/{id}', 'UsersController@deleteById');
+    Route::delete('/{user}', 'UsersController@deleteById');
 
 });

@@ -30,21 +30,21 @@ interface Repository
 
     /**
      *
-     * Update by id
+     * Update data
      *
      * @param Array|Collection $data
-     * @param int $id
+     * @param $user
      *
      */
-    public function update($data, int $id);
+    public function update($data, $user);
 
     /**
      *
-     * Delete by id
+     * Delete data
      *
-     * @param int $id
+     * @param $user
      *
      */
-    public function delete(int $id);
+    public function delete($user);
 
 }

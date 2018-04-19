@@ -29,7 +29,8 @@ class UserRepository implements Repository
      */
     public function store($data)
     {
-        User::create($data);
+        $data['password'] = bcrypt($data['password']);
+        return User::create($data);
     }
 
     /**
@@ -46,27 +47,43 @@ class UserRepository implements Repository
 
     /**
      *
-     * Updates user by id
+     * Updates user
      * Retrieves updated user
      *
      * @return Ingresse\User
      *
      */
-    public function update($data, int $id)
+    public function update($data, $user)
     {
-        $user = User::find($id);
+        if($user instanceof \Ingresse\User) // Is instance of \Ingresse\User
+            return $user->update($data);
+
+        $user = User::find($user); // Find by id
+
+        if(!$user) // Is null
+            return $user;
+
         $user->update($data);
+
         return $user;
     }
 
     /**
      *
-     * Deletes user by id
+     * Deletes user
      *
      */
-    public function delete(int $id)
+    public function delete($user)
     {
-        User::find($id)->delete();
+        if($user instanceof \Ingresse\User) // Is instance of \Ingresse\User
+            return $user->delete();
+
+        $user = User::find($user); // Find by id
+
+        if(!$user)
+            return $user;
+
+        return $user->delete();
     }
 
 }
