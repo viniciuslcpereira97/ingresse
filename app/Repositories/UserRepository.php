@@ -41,7 +41,7 @@ class UserRepository implements Repository
      */
     public function get(int $id)
     {
-        return User::find($id);
+        return User::findOrFail($id);
     }
 
     /**
@@ -54,7 +54,7 @@ class UserRepository implements Repository
      */
     public function update($data, int $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->update($data);
         return $user;
     }
@@ -66,7 +66,7 @@ class UserRepository implements Repository
      */
     public function delete(int $id)
     {
-        User::find($id)->delete();
+        User::findOrFail($id)->delete();
     }
 
 }
