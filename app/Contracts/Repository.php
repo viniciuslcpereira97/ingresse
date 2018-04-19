@@ -17,33 +17,34 @@ interface Repository
      * Store at database
      *
      */
-    public function store();
+    public function store($data);
 
     /**
      *
      * Get by id
      *
-     * @param integer $id
+     * @param int $id
      *
      */
-    public function get(integer $id);
+    public function get(int $id);
 
     /**
      *
      * Update by id
      *
-     * @param integer $id
+     * @param Array|Collection $data
+     * @param int $id
      *
      */
-    public function update(integer $id);
+    public function update($data, int $id);
 
     /**
      *
      * Delete by id
      *
-     * @param integer $id
+     * @param int $id
      *
      */
-    public function delete(integer $id);
+    public function delete(int $id);
 
 }
