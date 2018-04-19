@@ -1,9 +1,11 @@
 <?php
 
-namespace App;
+namespace Ingresse;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
+use Ingresse\Company;
 
 class User extends Authenticatable
 {
@@ -16,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
+        'birth', 'active', 'company_id',
     ];
 
     /**
@@ -26,4 +29,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     *
+     * Company relationship
+     *
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

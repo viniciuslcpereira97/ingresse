@@ -1,12 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace Ingresse\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Ingresse\Http\Controllers\Controller;
+use Ingresse\Repositories\UserRepository;
 
 class UsersController extends Controller
 {
+
+    private $repository;
+
+    /**
+     *
+     * Class constructor
+     *
+     * @param Ingresse\Repositories\UserRepository $repository
+     *
+     * Injects UserRepository at class
+     *
+     */
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      *
@@ -15,7 +32,7 @@ class UsersController extends Controller
      */
     public function all()
     {
-        return 'all';
+        return $this->repository->all();
     }
 
     /**
@@ -25,22 +42,34 @@ class UsersController extends Controller
      * @param integer $id
      *
      */
-    public function getUser($id)
+    public function getById($id)
     {
-        return 'get user';
+        return $this->repository->get($id);
+    }
+
+    /**
+     *
+     * Store user data
+     *
+     * @param Illuminate\Http\Request $request
+     *
+     */
+    public function store(Request $request)
+    {
+        return $this->repository->store($request->all());
     }
 
     /**
      *
      * Update user data by id
      *
-     * @param Request $request
+     * @param Illuminate\Http\Request $request
      * @param integer $id
      *
      */
-    public function udpateUser(Request $request, $id)
+    public function udpateById(Request $request, $id)
     {
-        return 'update user';
+        return $this->repository->update($request->all(), $id);
     }
 
     /**
@@ -50,9 +79,9 @@ class UsersController extends Controller
      * @param integer $id
      *
      */
-    public function deleteUser($id)
+    public function deleteById($id)
     {
-        return 'delete user';
+        return $this->repository->delete($id);
     }
 
 }
