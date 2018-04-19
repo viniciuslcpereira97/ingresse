@@ -55,10 +55,14 @@ class UserRepository implements Repository
      */
     public function update($data, $user)
     {
-        if(!is_int($user))
+        if($user instanceof \Ingresse\User) // Is instance of \Ingresse\User
             return $user->update($data);
 
-        $user = User::find($user);
+        $user = User::find($user); // Find by id
+
+        if(!$user) // Is null
+            return $user;
+
         $user->update($data);
 
         return $user;
@@ -71,10 +75,15 @@ class UserRepository implements Repository
      */
     public function delete($user)
     {
-        if(!is_int($user))
+        if($user instanceof \Ingresse\User) // Is instance of \Ingresse\User
             return $user->delete();
 
-        return User::find($user)->delete();
+        $user = User::find($user); // Find by id
+
+        if(!$user)
+            return $user;
+
+        return $user->delete();
     }
 
 }
