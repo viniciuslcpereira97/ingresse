@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use Ingresse\Http\Controllers\Controller;
 use Ingresse\Repositories\UserRepository;
 
+use Ingresse\Traits\ResponsesTrait;
+
 class UsersController extends Controller
 {
+
+    use ResponsesTrait;
 
     private $repository;
 
@@ -44,7 +48,7 @@ class UsersController extends Controller
      */
     public function getById($id)
     {
-        return $this->repository->get($id);
+        return $this->repository->get($id) ? : $this->recordNotFound();
     }
 
     /**
@@ -54,7 +58,7 @@ class UsersController extends Controller
      * @param Illuminate\Http\Request $request
      *
      */
-    public function store(Request $request)
+    public function store(\Ingresse\Http\Requests\UserRequest $request)
     {
         return $this->repository->store($request->all());
     }
@@ -64,24 +68,26 @@ class UsersController extends Controller
      * Update user data by id
      *
      * @param Illuminate\Http\Request $request
-     * @param integer $id
+     * @param integer|Ingresse\User $user
      *
      */
-    public function udpateById(Request $request, $id)
+    public function updateById(Request $request, $user)
     {
-        return $this->repository->update($request->all(), $id);
+        return $this->repository->update($request->all(), $user) ? :
+            $this->recordNotFound();
     }
 
     /**
      *
      * Delete user by id
      *
-     * @param integer $id
+     * @param integer|Ingresse\User $user
      *
      */
-    public function deleteById($id)
+    public function deleteById($user)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete($user) ? $this->recordDeleted() :
+            $this->recordNotFound();
     }
 
 }
