@@ -58,7 +58,7 @@ class UsersController extends Controller
      * @param Illuminate\Http\Request $request
      *
      */
-    public function store(\Ingresse\Http\Requests\UserRequest $request)
+    public function store(\Ingresse\Http\Requests\CreateUserRequest $request)
     {
         return $this->repository->store($request->all());
     }
