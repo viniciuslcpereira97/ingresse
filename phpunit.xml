@@ -31,7 +31,6 @@
 
         <!-- Testing database config-->
         <env name="DB_CONNECTION" value="testing"/>
-        <env name="DB_HOST" value="testing"/>
         <env name="DB_TEST_DATABASE" value="ingresse_testing"/>
     </php>
 </phpunit>
