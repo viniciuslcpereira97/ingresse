@@ -53,15 +53,12 @@ class UserRepository implements Repository
      * @return Ingresse\User
      *
      */
-    public function update($data, $user)
+    public function update($data, $id)
     {
-        if($user instanceof \Ingresse\User) // Is instance of \Ingresse\User
-            return $user->update($data);
-
-        $user = User::find($user); // Find by id
+        $user = $this->get($id); // Find by id
 
         if(!$user) // Is null
-            return $user;
+            return false;
 
         $user->update($data);
 
@@ -73,15 +70,12 @@ class UserRepository implements Repository
      * Deletes user
      *
      */
-    public function delete($user)
+    public function delete($id)
     {
-        if($user instanceof \Ingresse\User) // Is instance of \Ingresse\User
-            return $user->delete();
-
-        $user = User::find($user); // Find by id
+        $user = $this->get($id); // Find by id
 
         if(!$user)
-            return $user;
+            return false;
 
         return $user->delete();
     }
