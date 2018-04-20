@@ -41,7 +41,7 @@ return [
 
         'testing' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', 'testing'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_TEST_DATABASE', 'testing'),
             'username' => env('DB_USERNAME', 'forge'),

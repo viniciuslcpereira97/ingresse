@@ -1,0 +1,17 @@
+language: php
+
+php:
+    - 7.1
+
+services:
+    - mysql
+
+before_script:
+    - cp .env.travis .env
+    - composer install
+    - php artisan key:generate
+    - mysql --version
+    - mysql -e 'CREATE DATABASE ingresse_testing;'
+
+script:
+    - ./vendor/bin/phpunit
