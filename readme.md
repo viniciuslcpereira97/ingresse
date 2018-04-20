@@ -1,3 +1,7 @@
+# Ingresse REST API - Users
+
+[![Build Status](https://travis-ci.org/viniciuslcpereira97/ingresse.svg?branch=master)](https://travis-ci.org/viniciuslcpereira97/ingresse)
+
 # Installing
 
 ## Requirements:
