@@ -1,19 +1,33 @@
-version: '3'
+version: '2'
 services:
     app:
-        build: .
-        ports:
-            - "8009:8000"
+        build:
+            context: ./
+            dockerfile: app.dockerfile
         volumes:
-            - .:/app
-            - .env.docker:/app/.env
-        working_dir: /app
+            - ./:/var/www
+            - .env.docker:/var/www/.env
+        working_dir: /var/www
         depends_on:
             - db
             - testing
         links:
             - db
             - testing
+        # command: bash -c chmod -R 775 storage && chmod -R 775 bootstrap/cache
+        entrypoint:
+            - php-fpm
+
+    web:
+        image: nginx:alpine
+        volumes:
+            - ./vhost.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - 8888:80
+        volumes_from:
+            - app
+        links:
+            - app
 
     db:
         image: 'mysql:5.7'
