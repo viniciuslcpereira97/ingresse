@@ -10,7 +10,7 @@ before_script:
     - cp .env.docker .env
     - composer install
     - php artisan key:generate
-    - mysql -e 'CREATE DATABASE ingresse;'
+    - mysql -e 'CREATE DATABASE ingresse_testing;'
 
 script:
     - ./vendor/bin/phpunit
