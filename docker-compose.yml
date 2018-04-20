@@ -1,0 +1,32 @@
+version: '3'
+services:
+    app:
+        build: .
+        ports:
+            - "8009:8000"
+        volumes:
+            - .:/app
+            - .env.docker:/app/.env
+        working_dir: /app
+        depends_on:
+            - db
+            - testing
+        links:
+            - db
+            - testing
+
+    db:
+        image: 'mysql:5.7'
+        environment:
+            - MYSQL_ROOT_PASSWORD=ingresseroot
+            - MYSQL_DATABASE=ingresse
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=ingresseroot
+
+    testing:
+        image: 'mysql:5.7'
+        environment:
+            - MYSQL_ROOT_PASSWORD=ingresseroot
+            - MYSQL_DATABASE=ingresse_testing
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=ingresseroot
