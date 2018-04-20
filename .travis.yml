@@ -1,0 +1,16 @@
+language: php
+
+php:
+    - 7.1
+
+services:
+    - mysql
+
+before_script:
+    - cp .env.docker .env
+    - composer install
+    - php artisan key:generate
+    - mysql -e 'CREATE DATABASE ingresse;'
+
+script:
+    - ./vendor/bin/phpunit
