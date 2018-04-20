@@ -36,19 +36,29 @@ class UsersController extends Controller
      */
     public function all()
     {
-        return $this->repository->all();
+        $users = $this->repository->all();
+
+        if($users->count() == 0)
+            return $this->recordNotFound();
+
+        return $users;
     }
 
     /**
      *
      * Get user data by id
      *
-     * @param integer $id
+     * @param int $id
      *
      */
     public function getById($id)
     {
-        return $this->repository->get($id) ? : $this->recordNotFound();
+        $user = $this->repository->get($id);
+
+        if(!$user)
+            return $this->recordNotFound();
+
+        return $user;
     }
 
     /**
@@ -68,26 +78,34 @@ class UsersController extends Controller
      * Update user data by id
      *
      * @param Illuminate\Http\Request $request
-     * @param integer|Ingresse\User $user
+     * @param int $id
      *
      */
-    public function updateById(Request $request, $user)
+    public function updateById(Request $request, $id)
     {
-        return $this->repository->update($request->all(), $user) ? :
-            $this->recordNotFound();
+        $updated = $this->repository->update($request->all(), $id);
+
+        if(!$updated)
+            return $this->recordNotFound();
+
+        return $this->recordUpdated();
     }
 
     /**
      *
      * Delete user by id
      *
-     * @param integer|Ingresse\User $user
+     * @param int $id
      *
      */
-    public function deleteById($user)
+    public function deleteById($id)
     {
-        return $this->repository->delete($user) ? $this->recordDeleted() :
-            $this->recordNotFound();
+        $deleted = $this->repository->delete($id);
+
+        if(!$deleted)
+            return $this->recordNotFound();
+
+        return $this->recordDeleted();
     }
 
 }
