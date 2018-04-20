@@ -58,8 +58,8 @@ Install all dependencies:
 
 To run the application using docker-compose, run the following command:
 
-> docker-compose up -d
-> docker-compose exec app chgrp www-data -R storage
-> docker-compose exec app chmod 775 -R storage
+> docker-compose up -d  
+> docker-compose exec app chgrp www-data -R storage  
+> docker-compose exec app chmod 775 -R storage  
 
 After running this commands you'll be able to access the application at *localhost:8888*
