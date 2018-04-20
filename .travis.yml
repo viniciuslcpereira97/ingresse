@@ -7,7 +7,7 @@ services:
     - mysql
 
 before_script:
-    - cp .env.docker .env
+    - cp .env.travis .env
     - composer install
     - php artisan key:generate
     - mysql -e 'CREATE DATABASE ingresse_testing;'
