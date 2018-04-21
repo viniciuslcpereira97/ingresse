@@ -13,9 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Ingresse\Events\Event' => [
-            'Ingresse\Listeners\EventListener',
-        ],
+        'Ingresse\Events\UserEvent' => [
+            'Ingresse\Listeners\UpdateRedisCache',
+        ]
     ];
 
     /**
