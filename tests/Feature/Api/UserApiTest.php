@@ -6,6 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use Ingresse\Repositories\UserRepository;
+
 class UserApiTest extends TestCase
 {
     use RefreshDatabase;
@@ -18,7 +20,11 @@ class UserApiTest extends TestCase
     // All Users - GET - /api/users
     public function testAllUsersEndpoint()
     {
-        factory(\Ingresse\User::class, 20)->create();
+        $users = factory(\Ingresse\User::class, 5)->make();
+        $repository = new UserRepository;
+        foreach($users as $user) {
+            $repository->store($user->getAttributes());
+        }
 
         $response = $this->get('/api/users');
         $response->assertStatus(200);
