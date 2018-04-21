@@ -12,6 +12,7 @@ services:
             - db
         links:
             - db
+            - redis
         entrypoint:
             - php-fpm
 
@@ -26,7 +27,7 @@ services:
         links:
             - app
             - db
-
+            - redis
     db:
         image: 'mysql:5.7'
         environment:
@@ -34,3 +35,8 @@ services:
             - MYSQL_DATABASE=ingresse
             - MYSQL_USER=root
             - MYSQL_PASSWORD=ingresseroot
+
+    redis:
+        image: redis
+        ports:
+            - 8889:6379
