@@ -3,7 +3,7 @@
 namespace Ingresse\Repositories;
 
 use Ingresse\Contracts\Repository;
-
+use Ingresse\Events\UserEvent;
 use Ingresse\User;
 
 class UserRepository implements Repository
@@ -24,13 +24,28 @@ class UserRepository implements Repository
 
     /**
      *
+     * Retrieves all users from Redis cache
+     *
+     * @return
+     *
+     */
+    public function allFromCache()
+    {
+        return json_decode(\Redis::get('users'));
+    }
+
+    /**
+     *
      * Stores new user
      *
      */
     public function store($data)
     {
         $data['password'] = bcrypt($data['password']);
-        return User::create($data);
+        $user = User::create($data);
+
+        event(new UserEvent());
+        return $user;
     }
 
     /**
@@ -62,6 +77,7 @@ class UserRepository implements Repository
 
         $user->update($data);
 
+        event(new UserEvent());
         return $user;
     }
 
@@ -77,7 +93,9 @@ class UserRepository implements Repository
         if(!$user)
             return false;
 
-        return $user->delete();
+        $isDeleted = $user->delete();
+        event(new UserEvent());
+        return $isDeleted;
     }
 
 }
