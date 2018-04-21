@@ -5,6 +5,7 @@ php:
 
 services:
     - mysql
+    - redis
 
 before_script:
     - cp .env.travis .env

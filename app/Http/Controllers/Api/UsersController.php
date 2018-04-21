@@ -3,10 +3,11 @@
 namespace Ingresse\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Ingresse\Traits\ResponsesTrait;
 use Ingresse\Http\Controllers\Controller;
 use Ingresse\Repositories\UserRepository;
-
-use Ingresse\Traits\ResponsesTrait;
+use Ingresse\Http\Requests\CreateUserRequest as CreateRequest;
+use Ingresse\Http\Requests\UpdateUserRequest as UpdateRequest;
 
 class UsersController extends Controller
 {
@@ -36,9 +37,9 @@ class UsersController extends Controller
      */
     public function all()
     {
-        $users = $this->repository->all();
+        $users = $this->repository->allFromCache();
 
-        if($users->count() == 0)
+        if(!$users)
             return $this->recordNotFound();
 
         return $users;
@@ -68,7 +69,7 @@ class UsersController extends Controller
      * @param Illuminate\Http\Request $request
      *
      */
-    public function store(\Ingresse\Http\Requests\CreateUserRequest $request)
+    public function store(CreateRequest $request)
     {
         return $this->repository->store($request->all());
     }
@@ -81,7 +82,7 @@ class UsersController extends Controller
      * @param int $id
      *
      */
-    public function updateById(Request $request, $id)
+    public function updateById(UpdateRequest $request, $id)
     {
         $updated = $this->repository->update($request->all(), $id);
 
