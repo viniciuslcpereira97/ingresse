@@ -27,6 +27,7 @@ class UserApiTest extends TestCase
     // All Users - GET - /api/users
     public function testAllUsersEndpointNoRecord($value='')
     {
+        \Redis::del('users');
         $response = $this->get('/api/users');
 
         $response->assertStatus(404);
@@ -101,11 +102,14 @@ class UserApiTest extends TestCase
             'message' => 'record updated',
         ]);
 
-        $response = $this->put('/api/users/' . ($user->id + rand(1, 20)), ['email' => $newEmail]);
+        $response = $this->put('/api/users/' . ($user->id + rand(1, 20)), ['active' => 0]);
         $response->assertStatus(404);
         $response->assertJson([
             'message' => 'record not found',
         ]);
+
+        $response = $this->put('/api/users/' . ($user->id + rand(1, 20)), ['email' => $newEmail]);
+        $response->assertStatus(302);
     }
 
 }
