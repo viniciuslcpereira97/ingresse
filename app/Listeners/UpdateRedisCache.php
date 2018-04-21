@@ -25,7 +25,6 @@ class UpdateRedisCache
      */
     public function handle($event)
     {
-        Log::info('all users', $this->repository->all());
         \Redis::set('users',
             $this->repository->all()
         );
