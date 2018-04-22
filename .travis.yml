@@ -1,4 +1,4 @@
-language: php
+alanguage: php
 
 php:
     - 7.1
@@ -9,6 +9,7 @@ services:
 
 before_script:
     - cp .env.travis .env
+    - cp phpunit-travis.xml phpunit.xml
     - composer install
     - php artisan key:generate
     - mysql --version
