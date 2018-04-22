@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
     app:
         build:
@@ -40,6 +40,10 @@ services:
             - MYSQL_DATABASE=ingresse
             - MYSQL_USER=root
             - MYSQL_PASSWORD=ingresseroot
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pingresseroot"]
+            timeout: 20s
+            retries: 10
 
     testing:
         image: 'mysql:5.7'
@@ -48,6 +52,10 @@ services:
             - MYSQL_DATABASE=ingresse_testing
             - MYSQL_USER=root
             - MYSQL_PASSWORD=ingresseroot
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pingresseroot"]
+            timeout: 20s
+            retries: 10
 
     redis:
         image: redis
