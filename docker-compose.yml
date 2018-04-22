@@ -10,8 +10,11 @@ services:
         working_dir: /var/www
         depends_on:
             - db
+            - testing
+            - redis
         links:
             - db
+            - testing
             - redis
         entrypoint:
             - php-fpm
@@ -27,12 +30,22 @@ services:
         links:
             - app
             - db
+            - testing
             - redis
+
     db:
         image: 'mysql:5.7'
         environment:
             - MYSQL_ROOT_PASSWORD=ingresseroot
             - MYSQL_DATABASE=ingresse
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=ingresseroot
+
+    testing:
+        image: 'mysql:5.7'
+        environment:
+            - MYSQL_ROOT_PASSWORD=ingresseroot
+            - MYSQL_DATABASE=ingresse_testing
             - MYSQL_USER=root
             - MYSQL_PASSWORD=ingresseroot
 

@@ -13,6 +13,7 @@ before_script:
     - php artisan key:generate
     - mysql --version
     - mysql -e 'CREATE DATABASE ingresse_testing;'
+    - cp phpunit-travis.xml phpunit.xml
 
 script:
     - ./vendor/bin/phpunit
