@@ -9,11 +9,11 @@ services:
 
 before_script:
     - cp .env.travis .env
-    - cp phpunit-travis.xml phpunit.xml
     - composer install
     - php artisan key:generate
     - mysql --version
     - mysql -e 'CREATE DATABASE ingresse_testing;'
+    - cp phpunit-travis.xml phpunit.xml
 
 script:
     - ./vendor/bin/phpunit
