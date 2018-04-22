@@ -38,6 +38,8 @@ Now you have to migrate the project database, to do this execute the following c
 
  > ./vendor/bin/phpunit
 
+After that you can access the code coverage at **localhost:8000/code-coverage/index.html** when the server is started
+
 ## Running the application
 
 > php artisan serve
@@ -60,6 +62,43 @@ To run the application using docker-compose, run the following command:
 
 > docker-compose up -d  
 > docker-compose exec app chgrp www-data -R storage  
-> docker-compose exec app chmod 775 -R storage  
+> docker-compose exec app chmod 775 -R storage
+> docker-compose exec app ./vendor/bin/phpunit
 
-After running this commands you'll be able to access the application at *localhost:8888*
+After running this commands you'll be able to access the application at **localhost:8888** and the code coverage report at **localhost:8888/code-coverage/index.html**
+
+# Endpoints
+
+## Get all users
+
+> HTTP Verb: GET  
+/api/users
+
+## Get user by id
+
+> HTTP Verb: GET  
+/api/users/{id}
+
+## Store new user
+
+> HTTP Verb: POST  
+/api/users  
+
+POST Parameters:
+>* name (required | eg: Vinicius Luiz)
+* birth (required | eg: 1997-09-06)
+* email (required | eg: viniciuslcp97@gmail.com)
+* company_id (required | eg: 1)
+* password (required | eg: 123456)
+
+*Any other parameters will be discarded*
+
+## Update user
+
+> HTTP Verb: PUT  
+/api/users/{id}
+
+## Delete user
+
+> HTTP Verb: DELETE  
+> /api/users/{id}
