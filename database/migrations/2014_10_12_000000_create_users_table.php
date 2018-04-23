@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->date('birth');
-            $table->boolean('active');
+            $table->boolean('active')->default(0);
             $table->unsignedSmallInteger('company_id')->references('id')->on('companies');
             $table->string('password');
             $table->rememberToken();
