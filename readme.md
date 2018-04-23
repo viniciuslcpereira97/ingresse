@@ -85,11 +85,11 @@ After running this commands you'll be able to access the application at **localh
 /api/users  
 
 POST Parameters:
->* name (required | eg: Vinicius Luiz)
-* birth (required | eg: 1997-09-06)
-* email (required | eg: viniciuslcp97@gmail.com)
-* company_id (required | eg: 1)
-* password (required | eg: 123456)
+> * name (required | eg: Vinicius Luiz)
+> * birth (required | eg: 1997-09-06)
+> * email (required | eg: viniciuslcp97@gmail.com)
+> * company_id (required | eg: 1)
+> * password (required | eg: 123456)
 
 *Any other parameters will be dismissed*
 
