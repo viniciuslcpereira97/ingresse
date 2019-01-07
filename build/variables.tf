@@ -6,6 +6,8 @@ variable "instance" {
         name        = "ingresse-api"
         description = "ingresse api instance"
         type        = "t2.micro"
+        monitoring  = true
+        key         = "first-ec2"
     }
 }
 
