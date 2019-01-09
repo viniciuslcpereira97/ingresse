@@ -3,7 +3,7 @@ variable "instance" {
     type        = "map"
 
     default = {
-        name        = "ingresse-api"
+        name        = "ingresse_api"
         description = "ingresse api instance"
         type        = "t2.micro"
         monitoring  = true
@@ -16,7 +16,7 @@ variable "ami" {
     type        = "map"
 
     default = {
-        id = "ami-0497b4f776005706d"
+        id = "ami-0080165582b79aec0"
     }
 }
 
@@ -25,22 +25,17 @@ variable "load_balancer" {
     type        = "map"
 
     default = {
-        name = "ingresse-api-lb"
+        name = "ingresse-alb"
         type = "application"
     }
 }
 
-variable "target_group" {
-    description = "ingresse target group"
-    type        = "map"
+variable "availability_zone" {
+    type    = "map"
 
-    default {
-        arn  = ""
-        name = "ingresse-api-tg"
+    default = {
+        region      = "us-east-1"
+        primary   = "us-east-1a"
+        secundary = "us-east-1c"
     }
-}
-
-variable "vpc_id" {
-    type    = "string"
-    default = "vpc-75eba712"   
 }

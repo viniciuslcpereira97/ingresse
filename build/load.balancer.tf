@@ -1,11 +1,10 @@
-resource "aws_lb" "ingresse_api_lb" {
+resource "aws_alb" "ingresse_api_alb" {
     name               = "${var.load_balancer["name"]}"
     load_balancer_type = "${var.load_balancer["type"]}"
-    internal           = true
 
     subnets = [
-        "subnet-4311e825",
-        "subnet-59b57202"
+        "${aws_subnet.subnet_A.id}",
+        "${aws_subnet.subnet_B.id}"
     ]
 
     security_groups = [
