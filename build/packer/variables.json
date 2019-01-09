@@ -1,0 +1,8 @@
+{
+    "version": "1.0.0",
+    "environment": "prod",
+    "aws_access_key": "AKIAJUR5NNMLA2VHM6IQ",
+    "aws_secret_key": "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",
+    "ssh_username": "ec2-user",
+    "ssh_keypair_name": "first-ec2"
+}

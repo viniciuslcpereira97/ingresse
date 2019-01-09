@@ -1,0 +1,48 @@
+{
+  "builders": [{
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "type": "amazon-ebs",
+    "region": "us-east-1",
+    "source_ami": "ami-009d6802948d06e52",
+    "instance_type": "t2.micro",
+    "ami_name": "ingresse-api-{{timestamp}}",
+    "ami_description": "Ingresse API AMI",
+    "tags": {
+      "Terraform": "true",
+      "Version": "{{user `version`}}",
+      "Name": "ticket",
+      "Env": "{{user `environment`}}"
+    },
+    "subnet_filter": {
+        "filters": {
+            "tag:Name" : "subnet_A"
+        }
+    },
+    "security_group_filter": {
+        "filters": {
+            "tag:Type": "security_group"
+        }
+    },
+    "vpc_filter": {
+        "filters": {
+            "tag:Type": "vpc",
+            "tag:Name" : "main"
+        }
+    },
+    "ssh_username": "{{user `ssh_username`}}",
+    "ssh_keypair_name": "{{user `ssh_keypair_name`}}",
+    "ssh_agent_auth": false,
+    "ssh_private_key_file": "/home/viniciusluiz/.ssh/first-ec2-n-virginia.pem",
+    "associate_public_ip_address": true
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "scripts": ["./provision/config.sh"],
+    "environment_vars": [
+        "AWS_ACCESS_KEY={{user `aws_access_key`}}",
+        "AWS_SECRET_KEY={{user `aws_secret_key`}}",
+        "ENVIRONMENT={{user `environment`}}"
+    ]
+  }]
+}
